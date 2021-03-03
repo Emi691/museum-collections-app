@@ -8,7 +8,7 @@ class UsersController < ApplicationController
         @user = User.new(params)
         if @user.save && !@params.find_all{|element| element == ""}
             session[user_id] = @user.id 
-            #redirect to :"/users/#{@user.id}"
+            redirect to :"/users/#{@user.id}"
         else
             redirect to :"/signup"
         end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
         @user = User.find_by(params[:username])
         if @user && @user.authenticate(params[:password])
             params[:user_id] = @user.id
-            #redirect to :"/users/#{@user.id}"
+            redirect to :"/users/#{@user.id}"
         else
             redirect to :"/users/login"
         end
