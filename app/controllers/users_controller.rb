@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
     get '/signup' do
-        erb :"users/signup"
+        erb :"/users/signup"
     end
 
     post '/signup' do
@@ -15,7 +15,17 @@ class UsersController < ApplicationController
     end
 
     get '/login' do
-        erb :"users/login" 
+        erb :"/users/login" 
+    end
+
+    post 'login' do
+        @user = User.find_by(params[:username])
+        if @user && @user.authenticate(params[:password])
+            params[:user_id] = @user.id
+            #redirect to :"/users/#{@user.id}"
+        else
+            redirect to :"/users/login"
+        end
     end
 
 end
