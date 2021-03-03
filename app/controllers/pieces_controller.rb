@@ -9,4 +9,9 @@ class PiecesController < ApplicationController
         @piece = Piece.find_by(id: params[:id])
         erb :"/pieces/show"
     end
+
+    get '/pieces/new' do
+        erb :"pieces/new"
+    end
+
 end
