@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_182026) do
     t.string "email"
     t.string "password_digest"
     t.string "museum"
-    t.string "role"
+    t.string "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
