@@ -1,0 +1,24 @@
+<h1>Create a New Piece</h1>
+<br>
+
+<form action="/pieces" method="POST">
+<p>Title: <input type="text" id="title" name="piece[title]"></p>
+<p>Creator: <input type="text" id="creator" name="piece[creator]"></p>
+<p>Description: <input type="text" id="description" name="piece[description]"></p>
+<p>Medium: <input type="text" id="medium" name="piece[medium]"></p>
+<p>Dimensions: <input type="text" id="dimensions" name="piece[dimensions]"></p>
+<p>Weight: <input type="text" id="weight" name="piece[weight]"></p>
+<p>Condition: <input type="text" id="condition" name="piece[condition]"></p>
+<p>Current Treatments:</p>
+<p>Treatment 1: <input type="text" id="treatment_1" name="treatment[]"></p>
+<p>Treatment 2: <input type="text" id="treatment_2" name="treatment[]"></p>
+<p>Treatment 3: <input type="text" id="treatment_3" name="treatment[]"></p>
+<p>Hours Shown: <input type="text" id="hours_shown" name="piece[hours_shown]"></p>
+<p>Currently showing?</p>
+<p><input type="checkbox" id="showing" name="piece[showing]" value="true">Check if piece is currently showing.</p>
+<p>Current Location: <input type="text" id="location" name="piece[location]"></p>
+<p>Provenance: <input type="text" id="provenace" name="piece[provenance]"></p>
+<p>Appraised Value: <input type="text" id="appraised_value" name="piece[appraised_value]"></p>
+<p>Notes: <input type="text" id="notes" name="piece[notes]"></p>
+<p><input type="submit" value="Create Piece"></p>
+</form>
