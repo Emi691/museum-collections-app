@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_182026) do
     t.string "medium"
     t.string "dimensions"
     t.decimal "weight"
-    t.text "conditon"
+    t.text "condition"
     t.integer "hours_shown"
     t.boolean "showing"
     t.string "location"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2021_03_02_182026) do
     t.text "start_condition"
     t.text "end_condition"
     t.boolean "done"
-    t.integer "object_id"
+    t.integer "piece_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

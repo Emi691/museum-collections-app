@@ -7,7 +7,7 @@ class CreatePieces < ActiveRecord::Migration[5.2]
       t.string :medium
       t.string :dimensions
       t.decimal :weight
-      t.text :conditon
+      t.text :condition
       t.integer :hours_shown
       t.boolean :showing
       t.string :location

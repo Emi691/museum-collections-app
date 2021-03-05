@@ -19,12 +19,15 @@ class PiecesController < ApplicationController
 
     post '/pieces' do
         @piece = Piece.create(params[:piece])
-        params[:treatments].each do |treatement|
+        @piece.user = current_user
+        params[:treatments].each do |treatment|
+            if treatment.length > 0 
             treatment = Treatment.create(description: "#{treatment}", start_condition: params[:piece][:condition])
             treatment.piece = @piece
+            treatment.save
+            end
         end
         @piece.save
-        binding.pry
         redirect to :"/pieces/#{@piece.id}"
     end
 

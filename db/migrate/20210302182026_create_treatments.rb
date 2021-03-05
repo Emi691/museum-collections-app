@@ -5,7 +5,7 @@ class CreateTreatments < ActiveRecord::Migration[5.2]
       t.text :start_condition
       t.text :end_condition
       t.boolean :done
-      t.integer :object_id
+      t.integer :piece_id
       t.timestamps null: false
     end
   end
