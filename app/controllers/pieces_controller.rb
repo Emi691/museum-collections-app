@@ -24,6 +24,16 @@ class PiecesController < ApplicationController
         erb :"/pieces/edit"
     end
 
+    patch '/pieces/:id' do
+        @piece = Piece.find_by(id: params[:id])
+        @piece.update(params[:piece])
+        params[:treatments].each do |treatement|
+            treatment = Treatment.create(description: "#{treatment}", start_condition: params[:piece][:condition])
+            treatment.piece = piece
+        end
+        @piece.save
+    end
+
     get '/pieces/:id' do
         @piece = Piece.find_by(id: params[:id])
         erb :"/pieces/show"
