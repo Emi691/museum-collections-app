@@ -6,4 +6,5 @@ end
 
 use UsersController
 use PiecesController
+use TreatmentsController
 run ApplicationController
