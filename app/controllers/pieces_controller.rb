@@ -24,6 +24,7 @@ class PiecesController < ApplicationController
             treatment.piece = @piece
         end
         @piece.save
+        binding.pry
         redirect to :"/pieces/#{@piece.id}"
     end
 
