@@ -39,4 +39,13 @@ class PiecesController < ApplicationController
         erb :"/pieces/show"
     end
 
+    get '/objects/:id/delete' do
+        @piece = Piece.find_by(id: params[:id])
+        @piece.treatments.each do |treatment|
+            treatment.delete
+        end
+        @piece.delete
+        redirect to "/pieces"
+    end
+
 end
