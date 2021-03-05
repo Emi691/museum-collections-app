@@ -1,8 +1,12 @@
 class PiecesController < ApplicationController
     
     get '/pieces' do
-        @pieces = Piece.all
-        erb :"/pieces/index"
+        if logged_in?
+            @pieces = Piece.all
+            erb :"/pieces/index"
+        else
+            redirect to :"/users/login"
+        end
     end
 
     get '/pieces/new' do
