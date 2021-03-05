@@ -10,7 +10,11 @@ class PiecesController < ApplicationController
     end
 
     get '/pieces/new' do
+        if logged_in?
         erb :"pieces/new"
+    else
+        redirect to :"/users/login"
+    end
     end
 
     post '/pieces' do
