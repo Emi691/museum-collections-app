@@ -22,7 +22,7 @@
 <h4>Current Treatments:</h4>
 <p><%@piece.treatments.each do |treatment|%></p>
     <%if treatment.done == nil%>
-    <%=treatment.start_condition%>
+    <%=treatment.start_condition%><a href="/treatments/<%=treatment.id%>/mark-as-done">mark as done</a>
     <%=treatment.description%>
     <%end%>
 <%end%>

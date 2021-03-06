@@ -1,8 +1,14 @@
 class TreatmentsController < ApplicationController
 
-    get '/treatments/:id/mark_as_done' do
+    get '/treatments/:id/mark-as-done' do
         @treatment = Treatment.find_by(id: params[:id])
         @piece = @treatment.piece
-        @treatment.update(done: "true", end_condition: "#{@piece.condition}")
+        if @piece.condition == @treatment.start_condition
+            redirect to :"/piece/#{@piece.id}"
+        else
+            @treatment.update(done: "true", end_condition: "#{@piece.condition}")
+            @treatment.save
+            redirect to :"/piece/#{@piece.id}"
+        end
     end
 end
