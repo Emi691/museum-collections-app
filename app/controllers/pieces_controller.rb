@@ -28,30 +28,33 @@ class PiecesController < ApplicationController
             end
         end
         @piece.save
-        redirect to :"/pieces/#{@piece.id}"
+        redirect to :"/users/#{current_user.id}"
     end
 
     get '/pieces/:id/edit' do
         @piece = Piece.find_by(id: params[:id])
+        @current_treatments = @piece.treatments.map{|treatment| treatment.done == nil}
+        @past_treatments = @piece.treatments.map{|treatment| treatment.done == true}
         if logged_in? && @piece.user == current_user
              erb :"/pieces/edit"
         else
-            redirect to "/users/#{current_user.id}"
+            redirect to :"/users/#{current_user.id}"
         end
     end
 
     patch '/pieces/:id' do
         @piece = Piece.find_by(id: params[:id])
-        if @piece.user == current_user
+        if logged_in? && @piece.user == current_user
             @piece.update(params[:piece])
-            params[:treatments].each do |treatement|
-                treatment = Treatment.create(description: "#{treatment}", start_condition: params[:piece][:condition])
-                treatment.piece = piece
+            params[:treatment].each do |treatment|
+                new_treatment = Treatment.create(description: treatment, start_condition: params[:piece][:condition])
+                new_treatment.piece = @piece
+                new_treatment.save
             end
             @piece.save
-            redirect to "/pieces/#{@piece.id}"
+            redirect to :"/pieces/#{@piece.id}"
         else
-            redierct to "/users/#{current_user.id}"
+            redierct to :"/users/#{current_user.id}"
         end
     end
 
@@ -66,7 +69,7 @@ class PiecesController < ApplicationController
             treatment.delete
         end
         @piece.delete
-        redirect to "/pieces"
+        redirect to :"/pieces"
     end
 
 end

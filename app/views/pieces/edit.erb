@@ -1,8 +1,8 @@
 <h1>Edit Piece</h1>
 <br>
 
-<form action="/pieces" method="POST">
-<input type="hidden" id="hidden" name="_method" value="patch">
+<form action="/pieces/<%=@piece.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="patch">
 <p>Title: <input type="text" id="title" name="piece[title]" value="<%=@piece.title%>"></p>
 <p>Creator: <input type="text" id="creator" name="piece[creator]" value="<%=@piece.creator%>"></p>
 <p>Description: <input type="text" id="description" name="piece[description]" value="<%=@piece.description%>"></p>
@@ -13,16 +13,24 @@
 <p>Add a Treatment:</p>
 <p>Treatment: <input type="text" id="treatment_1" name="treatment[]"></p>
 <p>Current Treatments:</p>
-<%@current_treatments.each do |treatment|%>
-<p><%= treatment.start_condition%></p>
-<p><%= treatment.description%></p>
-<%end%>
+<%if @current_treatments.length > 0%>
+    <%@current_treatments.each do |treatment|%>
+    <p><%= treatment.start_condition%></p>
+    <p><%= treatment.description%></p>
+    <%end%>
+<%else%>
+    <p>This piece has no past treatments.</p> 
+<%end%>  
 <p>Past Treatments:</p>
-<%@past_treatments.each do |treatment|%>
-<p><%= treatment.start_condition%></p>
-<p><%= treatment.description%></p>
-<p><%= treatment.end_condition%></p>
-<%end%>
+<%if @past_treatments.length > 0%>
+    <%@past_treatments.each do |treatment|%>
+    <p><%= treatment.start_condition%></p>
+    <p><%= treatment.description%></p>
+    <p><%= treatment.end_condition%></p>
+    <%end%>
+<%else%>
+    <p>This piece has no past treatments.</p> 
+<%end%>  
 <p>Hours Shown: <input type="text" id="hours_shown" name="piece[hours_shown]" value="<%=@piece.hours_shown%>"></p>
 <p>Currently showing?</p>
 <p><input type="checkbox" id="showing" name="piece[showing]" value="true">Check if piece is currently showing.</p>

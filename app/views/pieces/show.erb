@@ -40,7 +40,11 @@
 <p><%=@piece.hours_shown%></p>
 <br>
 <h4>Currently Showing?</h4>
-<p><%=@piece.currently_showing%></p>
+    <%if !!@piece.showing%>
+        <p>Yes</p>
+    <%else%>
+        <p>No</p>
+    <%end%>
 <br>
 <h4>Location:</h4>
 <p><%=@piece.location%></p>
@@ -49,7 +53,7 @@
 <p><%=@piece.provenance%></p>
 <br>
 <h4>Apppraised Value:</h4>
-<p><%=@piece.apppraised_value%></p>
+<p><%=@piece.appraised_value%></p>
 <br>
 <h4>Notes:</h4>
 <p><%=@piece.notes%></p>
