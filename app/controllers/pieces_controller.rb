@@ -65,11 +65,15 @@ class PiecesController < ApplicationController
 
     get '/objects/:id/delete' do
         @piece = Piece.find_by(id: params[:id])
-        @piece.treatments.each do |treatment|
-            treatment.delete
+        if logged_in? && @piece.user == current_user
+            @piece.treatments.each do |treatment|
+                treatment.delete
+            end
+            @piece.delete
+            redirect to :"/pieces"
+        else
+            redirect to :"/pieces/#{@piece.id}"
         end
-        @piece.delete
-        redirect to :"/pieces"
     end
 
 end
