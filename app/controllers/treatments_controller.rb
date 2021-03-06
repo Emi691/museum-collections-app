@@ -11,4 +11,10 @@ class TreatmentsController < ApplicationController
             redirect to :"/piece/#{@piece.id}"
         end
     end
+
+    get '/treatments/:id/remove' do
+        @treatment = Treatment.find_by(id: params[:id])
+        @treatment.delete
+    end
+
 end
