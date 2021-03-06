@@ -20,10 +20,14 @@
 <p><%=@piece.condition%></p>
 <br>
 <h4>Current Treatments:</h4>
-<p><%@piece.treatments.each do |treatment|%></p>
+<p><%@piece.treatments.each_with_index do |treatment, index|%></p>
     <%if treatment.done == nil%>
-    <%=treatment.start_condition%> <a href="/treatments/<%=treatment.id%>/mark-as-done">mark as done</a> <a href="/treatments/<%=treatment.id%>/remove">remove</a>
+    <h4><%=index + 1%>.</h4>
+    <%=treatment.start_condition%>
+    <br>
     <%=treatment.description%>
+    <br>
+    <a href="/treatments/<%=treatment.id%>/mark-as-done"><input type="button" value="mark as done"></a> <a href="/treatments/<%=treatment.id%>/remove"><input type="button" value="remove"></a>
     <%end%>
 <%end%>
 <br>

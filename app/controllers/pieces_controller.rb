@@ -33,8 +33,9 @@ class PiecesController < ApplicationController
 
     get '/pieces/:id/edit' do
         @piece = Piece.find_by(id: params[:id])
-        @current_treatments = @piece.treatments.map{|treatment| treatment.done == nil}
-        @past_treatments = @piece.treatments.map{|treatment| treatment.done == true}
+        @current_treatments = @piece.treatments.find_all{|treatment| treatment.done == nil}
+        @past_treatments = @piece.treatments.find_all{|treatment| treatment.done == true}
+
         if logged_in? && @piece.user == current_user
              erb :"/pieces/edit"
         else
