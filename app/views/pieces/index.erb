@@ -1,5 +1,13 @@
-<h1>Pieces<h1>
+<a href="/users/<%=current_user.id%>">My Collection</a> <a href="/show/logout">Log Out</a>
 <br>
+<h1>Pieces</h1>
+<br>
+<body>
 <%@pieces.each do |piece|%>
+<p><a href="/pieces/<%=piece.id%>"><%=piece.title%></a></p>
+<%if piece.user == current_user%>
+<p><a href="/pieces/<%=piece.id%>/edit">edit</a></p>
+<%end%>
 <br>
 <%end%>
+</body>

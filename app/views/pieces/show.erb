@@ -1,3 +1,4 @@
+<a href="/users/<%=current_user.id%>">My Collection</a> <a href="/pieces">All Pieces</a> <a href="/show/logout">Log Out</a>
 <h1><%=@piece.title%></h1>
 <br>
 <br>
@@ -27,7 +28,9 @@
     <br>
     <%=treatment.description%>
     <br>
-    <a href="/treatments/<%=treatment.id%>/mark-as-done"><input type="button" value="mark as done"></a> <a href="/treatments/<%=treatment.id%>/remove"><input type="button" value="remove"></a>
+        <%if @piece.user == current_user%>
+        <a href="/treatments/<%=treatment.id%>/mark-as-done"><input type="button" value="mark as done"></a> <a href="/treatments/<%=treatment.id%>/remove"><input type="button" value="remove"></a>
+        <%end%>
     <%end%>
 <%end%>
 <br>

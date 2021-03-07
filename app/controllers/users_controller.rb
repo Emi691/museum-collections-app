@@ -4,17 +4,20 @@ class UsersController < ApplicationController
         erb :"/users/signup"
     end
 
-    post '/signup' do
-        if !User.find_by(params)
+    post '/users/signup' do
+        if !!User.find_by(username: params[:username])
+            flash[:message] = "The username you chose is already taken, please choose a different username."
+            redirect to :"/signup"
+        else
             @user = User.new(params)
-            if @user.save && !@params.find_all{|element| element == ""}
-                session[user_id] = @user.id 
+            if @user.save && !@params.find{|element| element == ""}
+                session[:user_id] = @user.id 
+                flash[:message] = "You have sucessfully signed up!"
                 redirect to :"/users/#{@user.id}"
             else
-                redirect to :"users/signup"
+                flash[:message] = "You must fill all fields to sign up."
+                redirect to :"/signup"
             end
-        else
-            redirect to :"users/signup"
         end
     end
 
