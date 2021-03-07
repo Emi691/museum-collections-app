@@ -1,0 +1,6 @@
+<h2>Update Condition:</h2>
+<form action="/pieces/<%=@piece.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="patch">
+<p><input type="text" id="condition" name="conditon[]" value="<%=@piece.condition%>"></p>
+<p><input type="submit" value="update oondition"></p>
+</form>
