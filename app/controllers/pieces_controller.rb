@@ -63,6 +63,15 @@ class PiecesController < ApplicationController
         end
     end
 
+    get '/pieces/:id/condition' do
+        @piece = Piece.find_by(id: params[:id])
+        if logged_in? && @piece.user == current_user
+            erb :"/pieces/condition"
+        else
+           redirect to :"/users/#{current_user.id}"
+        end
+    end
+
     get '/pieces/:id' do
         @piece = Piece.find_by(id: params[:id])
         erb :"/pieces/show"
