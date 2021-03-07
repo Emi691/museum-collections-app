@@ -6,7 +6,7 @@
 <a href="/pieces/new">add a new piece</a>
 <%if !@user.pieces.empty?%>
     <%@user.pieces.each do |piece|%>
-    <p><a href="/pieces/<%=piece.id%>"><%=piece.title%></a> <a href="/pieces/<%=piece.id%>/edit">edit</a> <a href="/pieces/<%=piece.id%>/delete">remove</a></p>
+    <p><a href="/pieces/<%=piece.id%>"><%=piece.title%></a> <a href="/pieces/<%=piece.id%>/edit"><input type="button" value="edit"></a> <a href="/pieces/<%=piece.id%>/delete"><input type="button" value="delete"></a></p>
     <%end%>
 <%else%>
     <p>Your collection is currently empty</p>

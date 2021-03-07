@@ -5,10 +5,12 @@ class TreatmentsController < ApplicationController
         @piece = @treatment.piece
         if logged_in? && @piece.user == current_user
             if @piece.condition == @treatment.start_condition
+                flash[:message] = "Please update condition to mark treatments as done."
                 redirect to :"/pieces/#{@piece.id}"
             else
                 @treatment.update(done: "true", end_condition: "#{@piece.condition}")
                 @treatment.save
+                flash[:message] = "treatment marked as done"
                 redirect to :"/pieces/#{@piece.id}"
             end
         else

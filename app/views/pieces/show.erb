@@ -19,7 +19,11 @@
 <br>
 <h4>Condition:</h4>
 <p><%=@piece.condition%></p>
+    <%if @piece.user == current_user%>
+    <a href="/pieces/<%=@piece.id%>/condition"><input type="button" value="update condition"></a>
+    <%end%>
 <br>
+
 <h4>Current Treatments:</h4>
 <p><%@piece.treatments.each_with_index do |treatment, index|%></p>
     <%if treatment.done == nil%>
@@ -37,9 +41,9 @@
 <h4>Previous Treatments:</h4>
 <p><%@piece.treatments.each do |treatment|%></p>
     <%if treatment.done == true%>
-    <%=treatment.start_condition%>
-    <%=treatment.end_condition%>
-    <%=treatment.description%>
+    <p>Condition before treatement: <%=treatment.start_condition%></p>
+    <p>Condition after treatement: <%=treatment.end_condition%></p>
+    <p>Treatment conducted: <%=treatment.description%></p>
     <%end%>
 <%end%>
 <br>

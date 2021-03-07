@@ -72,11 +72,12 @@ class PiecesController < ApplicationController
         end
     end
 
-    patch '/pices/:id/condition' do
+    patch '/pieces/:id/condition' do
         @piece = Piece.find_by(id: params[:id])
         if logged_in? && @piece.user == current_user
-            @piece.update(params[:condition])
+            @piece.update(condition: params[:condition])
             @piece.save
+            redirect to :"/pieces/#{@piece.id}"
         else
             redierct to :"/users/#{current_user.id}"
         end
@@ -87,7 +88,7 @@ class PiecesController < ApplicationController
         erb :"/pieces/show"
     end
 
-    get '/objects/:id/delete' do
+    get '/pieces/:id/delete' do
         @piece = Piece.find_by(id: params[:id])
         if logged_in? && @piece.user == current_user
             @piece.treatments.each do |treatment|

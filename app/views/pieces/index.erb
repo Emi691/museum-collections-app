@@ -6,7 +6,7 @@
 <%@pieces.each do |piece|%>
 <p><a href="/pieces/<%=piece.id%>"><%=piece.title%></a></p>
 <%if piece.user == current_user%>
-<p><a href="/pieces/<%=piece.id%>/edit">edit</a></p>
+<p><a href="/pieces/<%=piece.id%>/edit"><input type="button" value="edit"></a> <a href="/pieces/<%=piece.id%>/delete"><input type="button" value="delete"></a></p>
 <%end%>
 <br>
 <%end%>
