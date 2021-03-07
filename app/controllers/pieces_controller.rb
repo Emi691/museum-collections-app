@@ -18,17 +18,21 @@ class PiecesController < ApplicationController
     end
 
     post '/pieces' do
-        @piece = Piece.create(params[:piece])
-        @piece.user = current_user
-        params[:treatments].each do |treatment|
-            if treatment.length > 0 
-            treatment = Treatment.create(description: "#{treatment}", start_condition: params[:piece][:condition])
-            treatment.piece = @piece
-            treatment.save
+        if !Piece.find_by(title: params[:piece][:title]) 
+            @piece = Piece.create(params[:piece])
+            @piece.user = current_user
+            params[:treatments].each do |treatment|
+                if treatment.length > 0 
+                treatment = Treatment.create(description: "#{treatment}", start_condition: params[:piece][:condition])
+                treatment.piece = @piece
+                treatment.save
+                end
             end
+            @piece.save
+            redirect to :"/users/#{current_user.id}"
+        else
+            redirect to :'/pices/new'
         end
-        @piece.save
-        redirect to :"/users/#{current_user.id}"
     end
 
     get '/pieces/:id/edit' do
@@ -48,10 +52,10 @@ class PiecesController < ApplicationController
         if logged_in? && @piece.user == current_user
             @piece.update(params[:piece])
             params[:treatment].each do |treatment|
-                new_treatment = Treatment.create(description: treatment, start_condition: params[:piece][:condition])
-                new_treatment.piece = @piece
-                new_treatment.save
-            end
+            new_treatment = Treatment.create(description: treatment, start_condition: params[:piece][:condition])
+            new_treatment.piece = @piece
+            new_treatment.save
+                   end
             @piece.save
             redirect to :"/pieces/#{@piece.id}"
         else

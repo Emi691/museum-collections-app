@@ -5,12 +5,16 @@ class UsersController < ApplicationController
     end
 
     post '/signup' do
-        @user = User.new(params)
-        if @user.save && !@params.find_all{|element| element == ""}
-            session[user_id] = @user.id 
-            redirect to :"/users/#{@user.id}"
+        if !User.find_by(params)
+            @user = User.new(params)
+            if @user.save && !@params.find_all{|element| element == ""}
+                session[user_id] = @user.id 
+                redirect to :"/users/#{@user.id}"
+            else
+                redirect to :"users/signup"
+            end
         else
-            redirect to :"/signup"
+            redirect to :"users/signup"
         end
     end
 
