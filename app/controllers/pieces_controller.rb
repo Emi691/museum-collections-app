@@ -5,7 +5,7 @@ class PiecesController < ApplicationController
             @pieces = Piece.all
             erb :"/pieces/index"
         else
-            redirect to :"/users/login"
+            redirect to :"/login"
         end
     end
 
@@ -13,7 +13,7 @@ class PiecesController < ApplicationController
         if logged_in?
             erb :"pieces/new"
         else
-            redirect to :"/users/login"
+            redirect to :"/login"
         end
     end
 
@@ -29,8 +29,10 @@ class PiecesController < ApplicationController
                 end
             end
             @piece.save
+            flash[:message] = "New piece created!"
             redirect to :"/users/#{current_user.id}"
         else
+            flash[:message] = "A piece with this title already exists, please try again."
             redirect to :'/pices/new'
         end
     end
@@ -43,7 +45,7 @@ class PiecesController < ApplicationController
         if logged_in? && @piece.user == current_user
              erb :"/pieces/edit"
         else
-            redirect to :"/users/#{current_user.id}"
+            redirect to :"/login"
         end
     end
 
@@ -57,8 +59,10 @@ class PiecesController < ApplicationController
             new_treatment.save
                    end
             @piece.save
+            flash[:message] = "You have successfully edited #{@piece.title}"
             redirect to :"/pieces/#{@piece.id}"
         else
+            flash[:message] = "You are unable to edit this piece."
             redierct to :"/users/#{current_user.id}"
         end
     end
@@ -77,15 +81,21 @@ class PiecesController < ApplicationController
         if logged_in? && @piece.user == current_user
             @piece.update(condition: params[:condition])
             @piece.save
+            flash[:message] = "You have successfully update #{@piece.title}'s condition!"
             redirect to :"/pieces/#{@piece.id}"
         else
+            flash[:message] = "You cannot update the condition of this piece." 
             redierct to :"/users/#{current_user.id}"
         end
     end
 
     get '/pieces/:id' do
+        if logged_in?
         @piece = Piece.find_by(id: params[:id])
         erb :"/pieces/show"
+        else
+            redirect to :"/login"
+        end
     end
 
     get '/pieces/:id/delete' do
@@ -95,8 +105,10 @@ class PiecesController < ApplicationController
                 treatment.delete
             end
             @piece.delete
+            flash[:message] = "#{@piece.title} has been deleted."
             redirect to :"/pieces"
         else
+            flash[:message] = "You cannpt delete this piece."
             redirect to :"/pieces/#{@piece.id}"
         end
     end

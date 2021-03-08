@@ -1,4 +1,8 @@
-<a href="/users/<%=current_user.id%>">My Collection</a> <a href="/show/logout">Log Out</a>
+<% if flash.has?(:message)%>
+    <%=flash[:message]%>
+<%end%>
+<br>
+<a href="/users/<%=current_user.id%>">My Collection</a> <a href="/logout">Log Out</a>
 <br>
 <h1>Pieces</h1>
 <br>

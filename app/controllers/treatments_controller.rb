@@ -23,8 +23,10 @@ class TreatmentsController < ApplicationController
         @piece = @treatment.piece
         if logged_in? && @piece.user == current_user
             @treatment.delete
+            flash[:message] = "Treatment successfully deleted."
             redirect to :"/pieces/#{@piece.id}"
         else
+            flash[:message] = "You cannot delete this treatment."
             redirect to :"/pieces/#{@piece.id}"
         end
     end

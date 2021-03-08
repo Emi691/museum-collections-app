@@ -33,7 +33,7 @@ class UsersController < ApplicationController
             redirect to :"/users/#{@user.id}"
         else
             flash[:message] = "Incorrect username or password, please try again."
-            redirect to :"/users/login"
+            redirect to :"/login"
         end
     end
 
@@ -42,13 +42,19 @@ class UsersController < ApplicationController
         @user = User.find_by(id: params[:id]) 
         erb :"/users/show"
         else
-            redirect to :"/users/login"
+            redirect to :"/login"
         end
     end
 
     get '/logout' do
-        session.clear
-        redirect to "/login"
+        if logged_in?
+            session.clear
+            flash[:message] = "You are now logged out."
+            redirect to "/login"
+        else
+            flash[:message] = "You must be logged in before loggin out."
+            redirect to "/login"
+        end
     end
 
 end
