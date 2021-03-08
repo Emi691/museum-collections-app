@@ -1,4 +1,4 @@
-user_1 = User.create(username: "Andy", email: "andy22@mail.com", password: "HandyAndy", museum: "DeYoung", position: "curator")
+user_1 = User.create(username: "User1", email: "andy22@mail.com", password: "Password", museum: "DeYoung", position: "curator")
 user_2 = User.create(username: "Delilah", email: "delilah@email.net", password: "HeyThereDelilah", museum: "Smithsonian", position: "conservator")
 
 piece_1 = Piece.create(title: "Gumball Machines", creator: "Wayne", medium: "oil on canvas", dimensions: "18 x 24")

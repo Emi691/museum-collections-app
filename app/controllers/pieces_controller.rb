@@ -33,7 +33,7 @@ class PiecesController < ApplicationController
             redirect to :"/users/#{current_user.id}"
         else
             flash[:message] = "A piece with this title already exists, please try again."
-            redirect to :'/pices/new'
+            redirect to :'/pieces/new'
         end
     end
 
